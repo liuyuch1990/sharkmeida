@@ -1,0 +1,39 @@
+<view class='coupon_tabbar'>
+</view>
+<scroll-view scroll-y class='content_scroll'>
+  <view class='order_content'>
+    <view class="orders">
+      <view class="order" wx:for="{{listall}}" wx:key="{{item.order_id}}" data-qr="{{item.qr_img}}">
+
+        <scroll-view scroll-y class='goods_scroll'>
+          <view class="goods">
+            <view class="img">
+              <image src="{{item.thumbnail}}"></image>
+            </view>
+            <view class="info">
+              <text class="name">我是{{item.username}}，中了{{item.prize_name}}</text>
+            </view>
+            <view class="status" wx:if="{{item.prize_id==1}}">
+              <text class="number">未中奖</text>
+            </view>
+            <view class="status" wx:else>
+              <text class="number">已中奖</text>
+            </view>
+          </view>
+          <!-- <view class="b">
+            <view class="l">￥：{{item.total_price}}元</view>
+            <view class="r" wx:if="{{item.order_status=='3'}}">
+            </view>
+            <view class="r" wx:elif="{{item.order_status=='5'}}">
+            </view>
+            <view class="r" wx:else>
+              <button id='{{item.order_id}}' class="btn_query" bindtap='payMyOrder'>支付</button>
+            </view>
+          </view> -->
+        </scroll-view>
+
+
+      </view>
+    </view>
+  </view>
+</scroll-view>

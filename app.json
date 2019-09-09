@@ -1,0 +1,106 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/out/out",
+    "pages/catalog/catalog",
+    "pages/lotteryResult/lotteryResult",
+    "pages/newGoods/newGoods",
+    "pages/hotGoods/hotGoods",
+    "pages/ucenter/address/address",
+    "pages/ucenter/addressAdd/addressAdd",
+    "pages/ucenter/footprint/footprint",
+    "pages/ucenter/order/order",
+    "pages/ucenter/orderDetail/orderDetail",
+    "pages/ucenter/express/express",
+    "pages/ucenter/feedback/feedback",
+    "pages/ucenter/coupon/coupon",
+    "pages/ucenter/collect/collect",
+    "pages/pay/pay",
+    "pages/payResult/payResult",
+    "pages/ucenter/index/index",
+    "pages/comment/comment",
+    "pages/brand/brand",
+    "pages/brandDetail/brandDetail",
+    "pages/search/search",
+    "pages/gather/gather",
+    "pages/lottery/lottery",
+    "pages/gatherResult/gatherResult",
+    "pages/shopping/checkout/checkout",
+    "pages/shopping/address/address",
+    "pages/shopping/addressAdd/addressAdd",
+    "pages/goods/goods",
+    "pages/order/order",
+    "pages/bargin/bargin",
+    "pages/groupon/groupon",
+    "pages/shopping/shcoupon/shcoupon",
+    "pages/ucenter/bingphone/bingphone",
+    "pages/ucenter/customer/customer",
+    "pages/bargain/bargain",
+    "pages/couponCenter/couponcenter",
+    "pages/ucenter/ordercomment/ordercomment",
+    "pages/collagecheckout/collagecheckout",
+    "pages/collagegoods/collagegoods",
+    "pages/AwxChageUserInfoGet/wxChageUserInfoGet",
+    "pages/collageUserIn_pay/collageUserIn_pay",
+    "pages/ucenter/distribution/distribution",
+    "pages/ucenter/distribution_catch/distribution_catch",
+    "pages/ucenter/bankcard/bankcard",
+    "pages/ucenter/bingbankcard/bingbankcard",
+    "pages/luckdraw/luckdraw",
+    "pages/luckdraw_all/luckdraw_all",
+    "pages/Resagin_bargain/Resagin_bargain",
+    "pages/Resagin_bargain_goods/Resagin_bargain_goods",
+    "pages/ucenter/luckdraw/luckdraw",
+    "pages/ucenter/collage/collage",
+    "pages/ucenter/level_page/level_page",
+    "pages/ucenter/NoviceGuide/NoviceGuide",
+    "pages/ucenter/AftersaleGuide/AftersaleGuide"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "enablePullDownRefresh": false,
+    "navigationBarTitleText": "小飞象营销",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "backgroundColor": "#fafafa",
+    "borderStyle": "white",
+    "selectedColor": "#ffc20f",
+    "color": "#666",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "image/tab_home.png",
+        "selectedIconPath": "image/tab_home_select.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/catalog/catalog",
+        "iconPath": "image/tab_cart.png",
+        "selectedIconPath": "image/tab_cart_select.png",
+        "text": "商家活动"
+      },
+      {
+        "pagePath": "pages/ucenter/index/index",
+        "iconPath": "image/tab_my.png",
+        "selectedIconPath": "image/tab_my_select.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000,
+    "connectSocket": 30000,
+    "uploadFile": 30000
+  },
+  "debug": true,
+  "plugins": {
+    "tencentvideo": {
+      "version": "1.2.0",
+      "provider": "wxa75efa648b60994b"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

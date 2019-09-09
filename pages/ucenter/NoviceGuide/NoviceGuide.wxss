@@ -1,0 +1,209 @@
+.head{
+  background-color: #fff;
+}
+
+.headText{
+  padding: 20rpx 0rpx 0rpx 20rpx;
+  color: #fe4c40;
+}
+
+.choseReason{
+
+  padding: 30rpx 0rpx 30rpx 0rpx;
+  background-color: #fff;
+  display:inline-block;
+}
+
+.reasonItem{
+  margin:15rpx;
+  padding: 15rpx;
+  background-color: #efefef;
+  float :left;
+  display:inline;
+    color: #7a7a7a;
+
+}
+
+.remark{
+  margin-top: 20rpx;
+  background-color: #fff;
+}
+
+.remark-title{
+  display: flex;
+  color: #fe4c40;
+  padding: 30rpx 0rpx 30rpx 20rpx;
+}
+
+.inputRemark{
+  padding: 0rpx 20rpx 0rpx 20rpx;
+  width: 90%;
+}
+
+.imageTitle{
+  display: flex;
+  color: #fe4c40;
+  margin-top: 30rpx;
+  padding: 30rpx 0rpx 20rpx 20rpx;
+  background-color: #fff;
+}
+.gallery {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    background-color: #fff;
+
+}
+
+/*每张图片所占容器*/
+.itemImage {
+    position: relative;
+}
+
+
+/*小图片*/
+.thumb {
+	margin: 10rpx;
+  position: relative;
+}
+
+/*删除按钮*/
+.delete {
+	position: absolute;
+	height: 40rpx;
+	top: 0rpx;
+  right:0;
+	width: 40rpx;
+}
+
+.delete image {
+	position: absolute;
+	width: 30rpx;
+	height: 30rpx;
+}
+
+.photo{
+ text-align: center;
+ margin: 30rpx 0rpx 20rpx 0rpx;
+}
+
+.submitButton{   
+    width:80%;
+    height:90rpx;
+    background-color:#fe4c40;
+    border-radius:30px;
+    color:#fff;
+   margin: auto;
+   margin-top: 30rpx;
+   margin-bottom: 50rpx;
+   display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+page, .page, .page__bd {
+  height: 100%;
+}
+
+.page__bd {
+  padding-bottom: 0;
+}
+
+.page__list {
+  padding-top: 20px;
+}
+
+.weui-tab__content {
+  position: relative;
+  margin-top: 1.17647059em;
+  background-color: #fff;
+  line-height: 1.41176471;
+  font-size: 17px;
+}
+
+.weui-cell__ft button {
+  margin-top: 6px;
+  margin-left: 8px;
+}
+
+.weui-navbar {
+  background-color: #fff;
+}
+
+modal input {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #eaeaea;
+  padding-left: 5px;
+}
+
+.weui-btn-primary {
+	color: #ffffff !important;
+	background-color: #1aad19 !important;
+}
+.weui-btn-primary:active {
+	color: #ffffff !important;
+	background-color: #179b16 !important;
+}
+.weui-btn-success {
+	color: #ffffff !important;
+	background-color: #009688 !important;
+}
+.weui-btn-success:active {
+	color: #fff !important;
+	background-color: #00897b !important;
+}
+.weui-btn-info {
+	color: #ffffff !important;
+	background-color: #03a9f4 !important;
+}
+.weui-btn-info:active {
+	color: #fff !important;
+	background-color: #039be5 !important;
+}
+.weui-btn-warning {
+	color: #ffffff !important;
+	background-color: #ffc107 !important;
+}
+.weui-btn-warning:active {
+	color: #ffffff !important;
+	background-color: #ffb300 !important;
+}
+.weui-btn-danger {
+	color: #ffffff !important;
+	background-color: #e51c23 !important;
+}
+.weui-btn-danger:active {
+	color: #ffffff !important;
+	background-color: #dd191b !important;
+}
+.weui-btn-none {
+	color: #ffffff !important;
+	background-color: #dcdcdc !important;
+}
+.weui-btn-none:active {
+	color: #ffffff !important;
+	background-color: #cfcfcf !important;
+}
+
+.weui-icon-checkbox_success-info {
+  margin-left: 4.6px;
+  margin-right: 4.6px;
+  color: #03a9f4 !important;
+}
+
+.weui-input-null {
+  height: 2.58823529em;
+  min-height: 2.58823529em;
+  line-height: 2.58823529em;
+  color: #838383;
+}
+
+.weui-navbar__item.weui-bar__item_on {
+  color: #03a9f4 !important;
+}
+
+.weui-navbar__slider {
+  background-color: #03a9f4 !important;
+}

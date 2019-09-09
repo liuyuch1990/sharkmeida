@@ -1,0 +1,88 @@
+<!--index.wxml-->
+<scroll-view scroll-y class="container" style="height: 100%" enable-back-to-top>
+  <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
+    <swiper-item wx:for="{{banner}}" wx:key="{{item.id}}">
+      <navigator url="{{item.link}}">
+        <image lazy-load src="{{item.image_url}}" background-size="cover"></image>
+      </navigator>
+    </swiper-item>
+  </swiper>
+
+  <view class="icon_bar">
+    <view class="icon_bar_item" data-url='{{item.category_id}}' wx:for="{{channel}}" wx:key="{{item.id}}">
+      <!-- <navigator url="{{item.url}}"> -->
+      <image lazy-load class='icon_bar_img' src="{{item.icon_url}}" data-url="{{item.url}}" bindtap='navToPage'></image>
+      <!-- </navigator> -->
+      <view class="icon_bar_title">{{item.icon_text}}</view>
+    </view>
+  </view>
+
+  <!-- <view class="currency_goods_view_title_area" wx:for="{{contactList}}" wx:key="{{item.id}}">
+    <image class='currency_goods_view_title_area_banner' data-id='{{item.id}}' src='{{item.banner_url}}'></image>
+  </view>  -->
+  <view class="currency_goods_view_title_area">
+    <image class='currency_goods_view_title_area_left' src='{{contactImage}}'></image>
+    <image bindtap="phonecallevent" class='currency_goods_view_title_area_right' src='{{phoneImage}}'></image>
+  </view>
+
+  <view class="currency_title_view_title_area" style='margin-top:10rpx;' wx:key="{{item.id}}" wx:if="{{newGoods.length > 0}}">
+    <view class="currency_title_view_title_area_h">
+      精彩活动推荐
+    </view>
+  </view>
+  <view class="currency_goods_view_item" wx:if="{{newGoods.length > 0}}">
+    <view wx:for="{{newGoods}}" wx:key="{{item.id}}" class="currency_goods_view_item_a">
+      <image class="currency_goods_view_item_img" src="{{item.list_pic_url}}"></image>
+      <view class="currency_goods_view_item_name">{{item.name}}</view>
+      <view class="currency_goods_view_item_price">
+        <!-- <view class='currency_goods_view_item_price_left'> ￥
+          <span class="currency_goods_view_item_price_price">{{item.retail_price}}</span>
+        </view> -->
+        <view class='currency_goods_view_item_price_right'>进行中 </view>
+      </view>
+    </view>
+  </view>
+  <button formType="submit" class="submitBtn {{isdistribution?'isRuleShow':'isRuleHide'}}" bindtap='setLoadingActivity'>加载更多</button>
+  <view class="currency_title_view_title_area" style='margin-top:10rpx;'>
+    <view class="currency_title_view_title_area_h">
+      商家介绍
+    </view>
+    <view class="currency_goods_view_title_area" wx:for="{{floorGoods}}" wx:key="{{item.id}}">
+      <image class='currency_goods_intro' mode="widthFix" data-id='{{item.id}}' src='{{item.banner_url}}'></image>
+
+      <view class='intor_detail'>
+      </view>
+    </view>
+  </view>
+  <button formType="submit" class="submitBtn {{isRuleTrue?'isRuleShow':'isRuleHide'}} {{isRuleTrue}}" bindtap='setLoadingbusiness'>加载更多</button>
+  <view class="currency_title_view_title_area" style='margin-top:10rpx;'>
+    <view class="currency_title_view_title_area_h">
+      更多精彩视频
+    </view>
+    <swiper class="banner" indicator-dots="true" autoplay="{{auth}}" >
+      <swiper-item wx:for="{{videos}}" wx:key="{{item.id}}">
+        <view hidden="{{tvphide}}">
+          <txv-video vid="{{item.img_path}}" width="{{width}}" height="{{height}}" playerid="item.id" autoplay="{{auth}}" controls="{{controll}}" bindstatechange="onStateChange" bindtimeupdate="onTimeUpdate" showProgress="true" show-progress="true" bindfullscreenchange="onFullScreenChange">
+            <!-- // 支持slot，用于在video上显示UI
+        <cover-view class='txv-video-slot'>小飞象</cover-view> -->
+          </txv-video>
+        </view>
+      </swiper-item>
+    </swiper>
+    <!-- <view>点击可以观看,左滑可以查看更多视频 </view> -->
+  </view>
+  <!-- <view class="currency_goods_view_title_area" wx:for="{{floorGoods}}" wx:key="{{item.id}}">  
+    <view class="seemore">
+      <navigator url="/pages/category/category?id={{item.id}}" class="more-a">
+        <view class='moretext'>{{'更多'+item.name}}</view>
+        <image class="moreicon" src="../../static/images/address_right.png"></image>
+      </navigator>
+    </view>
+    <!-- </view> 
+  </view> -->
+  <view class='comy_tip comy_tip_btn'>您已经到底啦 ~ </view>
+  <view class='comy_tip comy_tip_btn'>小飞象网络 提供技术支持</view>
+</scroll-view>
+<!-- <image class='back_to_top' src="../../image/top.png" bindtap='back_to_top'></image>  -->
+<!-- <button class='shall_buttom' wx:if="{{scrollTop > 422}}" open-type="share" wx:if="{{auth && isdistribution}}">
+  分享此页面给好友赚取佣金</button> -->

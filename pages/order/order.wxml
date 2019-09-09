@@ -1,0 +1,40 @@
+<view class='coupon_tabbar'>
+  <view class='order'  data-tab='{{index}}' wx:key="{{item.key}}">
+    <!-- <image lazy-load class='addorder_img' src="../../image/addOrder.png" bindtap='OutUrl'></image> -->
+    <view class="b">
+    <button id='{{item.id}}' class="btn_query" bindtap='exportExcel'>导出活动</button>
+    <!-- <span wx:if="{{orderList.length > 0}}">( {{orderList.length}} )</span>
+    <span wx:if="{{orderList.length == 0}}"></span>  -->
+    </view>
+  </view>
+</view>
+<scroll-view scroll-y class='content_scroll'>
+  <view class='order_content'>
+    <view class="orders">
+      <view class="order" wx:for="{{listall}}" wx:key="{{item.order_id}}">
+
+        <scroll-view scroll-y class='goods_scroll'>
+          <view class="goods">
+            <view class="img">
+              <image src="{{item.headimgurl}}"></image>
+            </view>
+            <view class="info">
+            <view wx:if="{{showDistribution}}">
+              <text class="name">{{item.username}}消费{{item.total_price}}元购买了{{item.activity_name}}</text>
+            </view>  
+            <view wx:elif="{{showGather}}">
+              <text class="name">{{item.username}}参加了{{item.activity_name}}活动</text>
+            </view>
+            <view wx:elif="{{showLottery}}">
+              <text class="name">{{item.username}}中了{{item.prize_name}}奖</text>
+            </view>    
+              <text class="spec">{{item.create_time}}</text>
+            </view>
+            <view class="status"></view>
+            <text id='{{item.mobile}}' class="number" bindtap='phonecallevent'>联系方式</text>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

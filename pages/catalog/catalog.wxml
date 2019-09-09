@@ -1,0 +1,34 @@
+  <view class="currency_title_view_title_area" style='margin-top:10rpx;'>
+    <view class="currency_title_view_title_area_h">
+      进行中的活动
+    </view>
+  </view>
+  <view class="currency_goods_view_item" wx:if="{{activelist.length > 0}}">
+    <view wx:for="{{activelist}}" wx:key="{{item.id}}" class="currency_goods_view_item_a">
+      <image class="currency_goods_view_item_img" src="{{item.list_pic_url}}"></image>
+      <view class="currency_goods_view_item_name">{{item.name}}</view>
+      <view class="currency_goods_view_item_price">
+        <!-- <view class='currency_goods_view_item_price_left'> ￥
+          <span class="currency_goods_view_item_price_price">{{item.retail_price}}</span>
+        </view> -->
+        <view class='currency_goods_view_item_price_right'>进行中 </view>
+      </view>
+    </view>
+  </view>
+    <view class="currency_title_view_title_area" style='margin-top:10rpx;'>
+    <view class="currency_title_view_title_area_h">
+      已结束的活动
+    </view>
+  </view>
+<view class="currency_goods_view_item" wx:if="{{activelist.length > 0}}">
+    <view wx:for="{{activelist}}" wx:key="{{item.id}}" class="currency_goods_view_item_a">
+      <image class="currency_goods_view_item_img" src="{{item.list_pic_url}}"></image>
+      <view class="currency_goods_view_item_name">{{item.name}}</view>
+      <view class="currency_goods_view_item_price">
+        <!-- <view class='currency_goods_view_item_price_left'> ￥
+          <span class="currency_goods_view_item_price_price">{{item.retail_price}}</span>
+        </view> -->
+        <view class='currency_goods_view_item_price_right'>进行中 </view>
+      </view>
+    </view>
+  </view>

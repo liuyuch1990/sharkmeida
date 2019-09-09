@@ -1,0 +1,79 @@
+<modal hidden="{{hiddenmodalput}}" title="编辑分类名称" confirm-text="编辑" cancel-text="取消" bindcancel="btnEditClassNameCancel" bindconfirm="btnEditClassNameConfirm">
+  <input type='text' name="ClassName" value="{{editClassName}}" bindinput='inputEditClassName' />
+</modal>
+<view class="page">
+  <form bindsubmit="bindSubmit">
+    <text class="imageTitle">首页轮播图:<text style="color:#737373;font-size:30rpx;">(若无则可不上传)</text></text>
+    <view class="gallery">
+      <view class="itemImage" wx:for="{{roll_images}}">
+        <image class="thumb" data-current="{{item}}" style="width: {{2*image_width}}rpx; height: {{2*image_width}}rpx" src="{{item.img_path}}" />
+        <image class="delete" src="../../../image/deleteImage.png" data-index="{{index}}" data-id="{{item.id}}" bindtap="delete_roll"></image>
+      </view>
+      <image class="thumb" style="width: {{2*image_width}}rpx; height: {{2*image_width}}rpx" src="../../../image/upload.png" bindtap="upImg" />
+    </view>
+
+    <text class="imageTitle">商户联系方式:<text style="color:#737373;font-size:30rpx;">(请按顺序上传两张)</text></text>
+    <view class="gallery">
+      <view class="itemImage" wx:for="{{business_images}}">
+        <image class="thumb" data-current="{{item}}" style="width: {{2*image_width}}rpx; height: {{2*image_width}}rpx" src="{{item.img_path}}" />
+        <image class="delete" src="../../../image/deleteImage.png" data-id="{{item.id}}" data-index="{{index}}" bindtap="delete_business"></image>
+      </view>
+      <image class="thumb" style="width: {{2*image_width}}rpx; height: {{2*image_width}}rpx" src="../../../image/upload.png" bindtap="upBusinessImg" />
+    </view>
+
+    <text class="imageTitle">商户介绍:<text style="color:#737373;font-size:30rpx;"></text></text>
+    <view class="gallery">
+      <view class="itemImage" wx:for="{{description_images}}">
+        <image class="thumb" data-current="{{item}}" style="width: {{2*image_width}}rpx; height: {{2*image_width}}rpx" src="{{item.img_path}}" />
+        <image class="delete" src="../../../image/deleteImage.png" data-id="{{item.id}}" data-index="{{index}}" bindtap="delete_description"></image>
+      </view>
+      <image class="thumb" style="width: {{2*image_width}}rpx; height: {{2*image_width}}rpx" src="../../../image/upload.png" bindtap="upDescriptionImg" />
+    </view>
+
+    <view class='page__list'>
+      <view class="weui-cells__title">小程序功能列表</view>
+      <view class="weui-btn-area">
+        <button class="weui-btn weui-btn-info" bindtap='upBannerImg'>添加功能</button>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell" wx:for="{{banner_images}}" wx:key="key">
+          <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+            <image src="{{item.img_path}}" style="width: 37px; height: 37px; display: block; border-radius:50%; " />
+          </view>
+          <view class="weui-cell__bd">{{item.name}}</view>
+          <view class="weui-cell__ft">
+            <button size="mini" data-type="out" data-id="{{item.id}}" data-index="{{index}}" data-name="{{item.name}}" class="weui-btn weui-btn-primary" bindtap="btnClassEdit">编辑</button>
+            <text>\t</text>
+            <!-- <button size="mini" data-type="out" data-id="{{item.id}}" data-name="{{item.name}}" class="weui-btn weui-btn-warning" hover-class="weui-cell_active" bindtap="btnClassChange">转移</button>
+            <text>\t</text> -->
+            <button size="mini" data-type="out" data-id="{{item.id}}" data-index="{{index}}" data-name="{{item.name}}" class="weui-btn weui-btn-danger" bindtap="delete_banner">删除</button>
+            <text>\t</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='page__list'>
+      <view class="weui-cells__title">腾讯视频vid上传</view>
+      <view class="weui-btn-area">
+        <button class="weui-btn weui-btn-info" bindtap='upVideo'>添加视频</button>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input weui-cell_vcode" wx:for="{{videos}}" wx:key="key">
+          <view class="weui-cell__hd">
+            <view class="weui-label">视频vid</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入vid" data-index="{{index}}" value='{{item.img_path}}' bindinput="inputTyping"  />
+          </view>
+          <view class="weui-cell__ft">
+            <button size="mini" data-type="out" data-id="{{item.id}}" data-index="{{index}}" data-name="{{item.name}}" class="weui-btn weui-btn-primary" bindtap="btnVideoEdit">保存</button>
+            <text>\t</text>
+            <button size="mini" data-type="out" data-id="{{item.id}}" data-index="{{index}}" data-name="{{item.name}}" class="weui-btn weui-btn-danger" bindtap="delete_video">删除</button>
+            <text>\t</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </form>
+
+</view>
