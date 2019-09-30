@@ -30,13 +30,18 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     var that = this
-    wx.showLoading({
-      title: '核实中...',
-      mask: true,
+    var userinfo = wx.getStorageSync("userInfo")
+    that.setData({
+      userinfo: userinfo
     })
-    that.findphone();
+    if (userinfo.mobile != null || userinfo.mobile != undefined) {
+      that.setData({
+        isbing: true
+      })
+    }
+    //that.findphone();
   },
   startBingPhone() {
     let that = this
@@ -83,7 +88,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  findphone: function() {
+  findphone: function () {
     let that = this;
     let userinfo = wx.getStorageSync("userInfo");
     wx.hideLoading()
@@ -114,7 +119,7 @@ Page({
       util.request(api.BingPhoneText, {
         Phone: that.data.inputMobile,
         selectedcountry: that.data.selectedcountry
-      }, 'POST').then(function(res) {
+      }, 'POST').then(function (res) {
         console.log(res)
         if (res.errno === 1001) {
           wx.showToast({
@@ -129,7 +134,7 @@ Page({
           util.request(api.SedAbroadSode, {
             phone: that.data.inputMobile,
             selectedcountry: that.data.selectedcountry,
-          }, 'POST').then(function(res) {
+          }, 'POST').then(function (res) {
             console.log(res)
             if (res.errno === 0) {
               wx.showToast({
@@ -202,7 +207,7 @@ Page({
           util.request(api.SedDomesticSode, {
             phone: that.data.inputMobile,
             selectedcountry: that.data.selectedcountry,
-          }, 'POST').then(function(res) {
+          }, 'POST').then(function (res) {
             console.log(res)
             if (res.errno === 0) {
               wx.showToast({
@@ -270,7 +275,7 @@ Page({
       })
     }
   },
-  checked: function() {
+  checked: function () {
     var that = this
     console.log(that.data.truesode)
     console.log(that.data.inputMobile)
@@ -292,7 +297,7 @@ Page({
           bingphone: that.data.inputMobile,
           selectedcountry: that.data.selectedcountry,
           userid: that.data.userinfo.id
-        }, 'POST').then(function(res) {
+        }, 'POST').then(function (res) {
           console.log(res)
           if (res.data.Findresult === 1) {
             wx.showToast({
@@ -300,7 +305,7 @@ Page({
               icon: 'success',
               duration: 2000
             })
-            util.request(api.BingPhoneFind).then(function(res) {
+            util.request(api.BingPhoneFind).then(function (res) {
               console.log(res)
               that.setData({
                 show_mask: false,
@@ -316,12 +321,12 @@ Page({
       // })
     }
   },
-  changed: function() {
+  changed: function () {
     var that = this
     wx.showModal({
       title: '提示',
       content: '是否更换绑定手机号？',
-      success: function(res) {
+      success: function (res) {
         if (res.confirm) {
           console.log('用户点击确定')
           that.setData({
@@ -355,7 +360,7 @@ Page({
       selectedcountry: []
     })
   },
-  getPhoneNumber: function(e) {
+  getPhoneNumber: function (e) {
 
     console.log(e.detail.iv);
 
@@ -389,7 +394,7 @@ Page({
 
           }, // 设置请求的 header
 
-          success: function(res) {
+          success: function (res) {
 
             if (res.data.code == '0000') { //我后台设置的返回值为1是正确
 
@@ -414,7 +419,7 @@ Page({
 
           },
 
-          fail: function(err) {
+          fail: function (err) {
 
             console.log(err);
 
@@ -430,42 +435,42 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

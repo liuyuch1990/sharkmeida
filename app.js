@@ -14,7 +14,7 @@ App({
       }
     })
     console.log('action')
-    user.loginByWeixin().then(res => {
+    user.checkLogin().then(res => {
       console.log('app login')
       // console.log(res)
       this.globalData.userInfo = wx.getStorageSync('userInfo');

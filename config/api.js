@@ -1,6 +1,6 @@
 const ApiRootUrl = 'https://wx.sharkmeida.cn/sys/log/queryAll';
 // const ApiRootUrl = 'http://118.25.7.94:8360';
-
+const ApiRoot = 'https://wx.sharkmeida.cn/';
 module.exports = {
   IndexUrl: ApiRootUrl, //首页数据接口
   weixinPay: 'https://wx.sharkmeida.cn/api/wxpay/prepayApp',
@@ -10,6 +10,8 @@ module.exports = {
   deleteAppForPic: 'https://wx.sharkmeida.cn/sys/log/deleteAppForPic/',
   queryApp: 'https://wx.sharkmeida.cn/sys/log/queryApp',
   updateAppForPic: 'https://wx.sharkmeida.cn/sys/log/updateAppForPic',
+  queryAllUsers: 'https://wx.sharkmeida.cn/sys/user/queryAllUsers',
+  updateUsersStatus: 'https://wx.sharkmeida.cn/sys/user/update',
   CatalogList: ApiRootUrl + 'catalog/index',  //分类目录全部分类数据接口
   CatalogCurrent: ApiRootUrl + 'catalog/current',  //分类目录当前分类数据接口
   OrderByUserAndActivity: 'https://wx.sharkmeida.cn/api/order/getOrderByUserIdAndActivityType',

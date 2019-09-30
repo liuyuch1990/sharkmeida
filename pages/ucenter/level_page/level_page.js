@@ -1,244 +1,177 @@
-// pages/ucenter/level_page/level_page.js
+const app = getApp();
 var util = require('../../../utils/util.js');
 var api = require('../../../config/api.js');
 var user = require('../../../services/user.js');
-var app = getApp();
 
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    userInfo: {},
-    userLevelData: {
-      user_all_price: 0.00,
-      user_recharge_monery: 0.00,
-      user_discount: 1.00,
-      user_level: 0,
-    },
-    user_rechange_list: [],
-    level_list: [],
-    btn_sure_disabled: true,
-    show_input_box: false,
-    disvalue: '',
+    type: '',
+    orderList: [],
+    refund_orderid: '',
+    refund_orderprice: '',
+    refund_resond: '',
+    nav_item: ['待付款', '待发货', '待收货', '已完成', '退款/售后'],
+    refund_nologarray: ['全额退款'],
+    refund_logarray: ['全额退款', '部分退款'],
+    refund_index: 0,
+    refund_logindex: 0,
+    refund_resonarray: ['拍错商品', '商品缺货', '与卖家协商一致退款', '未按约定时间发货', '其他'],
+    refund_logresonarray: ['拍错商品', '商品缺货', '与卖家协商一致退款', '未按约定时间发货', '漏发/错发', '收到商品不符合描述', '认为不是正品', '商品质量问题', '其他'],
+    refundreson_index: 0,
+    refundreson_logindex: 0,
+    activeTab: 0,
+    refund_type: 0,
+    refundloc_orderid: '',
+    refundloc_orderprice: '',
+    qiniuUpload: '',
+    refund_price: '',
+    refund_uploadimg: [],
+    // comment_uploadimg:[],
+    showModalStatusComment: false,
+    animationDataComment: '',
+    showModalStatus: false,
+    animationData: '',
+    comment_detail: {},
+    showRefundBox: false,
+    showRefundTimeBox: false,
+    showDistribution: false,
+    showGather: false,
+    showLottery: false,
+    timestate: 'null',
+    // auth: false,
+    distributionData: [],
+    userinfo: '',
+    listall: []
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    // console.log(options)
-    let that = this
+    // 页面初始化 options为页面跳转所带来的参数
+    let that = this;
+    //that.setDistriPrice('20180605152025161097')
+    // that.checkisstoragedis('20180605152025161097')
+    that.getListall(options);
     try {
-      var value = wx.getStorageSync('userInfo')
-      if (value) {
-        // Do something with return value
-        console.log(value)
-        that.setData({
-          userInfo: value
-        })
-        that.getuserLevelInfo()
-      }
+      var tab = wx.getStorageSync('tab');
+      // console.log(addressId)
+      // if (addressId != '') {
+      this.setData({
+        activeTab: tab
+      });
+      // }
     } catch (e) {
       // Do something when catch error
     }
+    // console.log(app.globalData.token)
+
+
 
   },
-  getuserLevelInfo() {
-    let that = this
-    util.request(api.getUserLevelInfo,{
-      userId: that.data.userInfo.id
-    },'POST').then(res => {
+  getListall(options) {
+    let that = this;
+    let url = '';
+    util.request(api.queryAllUsers, {
+    }, 'POST').then(function (res) {
       console.log(res)
-      if(res.errno === 0){
+      wx.hideLoading()
+      if (res.code === 0) {
         that.setData({
-          userLevelData: res.data.data,
-          level_list: res.data.level_list,
-          user_rechange_list: res.data.rechange_list
-        })
-        that.reloadlisttime()
+          listall: res.users
+        });
+
       }
-    })
-     
+    });
   },
-  reloadlisttime(){
+  onShow() {
     let that = this
-    if (that.data.userLevelData.user_level < that.data.level_list.length){
-      let rest_price = (that.data.level_list[that.data.userLevelData.user_level].recharge_monery - that.data.userLevelData.user_recharge_monery).toFixed(2)
-      console.log(rest_price)
-      that.data.userLevelData.rest_price = rest_price
-    }
-    
-    for (let i = 0; i < that.data.user_rechange_list.length; i++){
-      var list = that.data.user_rechange_list[i]
-      list.add_localtime = util.timestampToTime(list.add_time)
-    }
+    // if (app.globalData.token == "") {
+    //   that.setData({
+    //     auth: false
+    //   })
+    //   wx.showToast({
+    //     title: '未授权！请在“我的”页点击头像授权!',
+    //     icon: 'none',
+    //     duration: 2000,
+    //     mask: true,
+    //   })
+    // } else {
+    //   //用户已经授权过
+    //   that.setData({
+    //     auth: true
+    //   })
+    // wx.showLoading({
+    //   title: '获取中...',
+    //   mask: true,
+    //   success: function (res) {
+    //     that.getOrderList();
+    //    },
+    //   fail: function (res) { },
+    //   complete: function (res) { },
+    // })
+    // }
     that.setData({
-      user_rechange_list: that.data.user_rechange_list,
-      userLevelData: that.data.userLevelData
+      auth: true
     })
+    this.onLoad(that.options);
   },
-  startRecharge(){
-    let that = this
-    wx.showModal({
-      title: '提示',
-      content: '点击确认填写充值金额即可生成充值订单，付款后您将获得更大的优惠 ！ （充值订单不可退款 ！）',
-      success: function(res) {
-        if(res.confirm){
-          setTimeout(() => {
-            that.setData({
-              show_input_box: true
-            })
-          },200)
-        }
-      },
-      fail: function(res) {},
-      complete: function(res) {},
-    })
+  getOrderList() {
+    let that = this;
+    // console.info('api.OrderList', api.OrderList);
+    // console.info(' that.data.activeTab', that.data.activeTab);
+
+    // util.request("https://www.jieruida-qd.com/sys/log/queryAll", {
+    //   index: that.data.activeTab
+    // }, 'POST').then(function (res) {
+    //   wx.hideLoading()
+    //   if (res.errno === 0) {
+    //     that.setData({
+    //       orderList: res.data.reverse()
+    //     });
+    //   }
+    // });
   },
-  close_mask() {
-    this.setData({
-      show_input_box: false
-    })
-  },
-  input_money(e) {
-    let that = this
-    let reg = /^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/
-    if (Number(e.detail.value) == 0) {
-      that.setData({
-        btn_sure_disabled: true
-      })
-    } else if (Number(e.detail.value) > 999999) {
-      that.setData({
-        btn_sure_disabled: true
-      })
-    } else if (reg.test(e.detail.value)) {
-      that.setData({
-        btn_sure_disabled: false
-      })
-    } else if (!reg.test(e.detail.value)) {
-      that.setData({
-        btn_sure_disabled: true
-      })
-    }
-    that.setData({
-      disvalue: e.detail.value
-    })
-  },
-  rechargeSure(){
-    let that = this
-    wx.showModal({
-      title: '提示',
-      content: '点击确认即表示立即充值。 （充值订单不可退款 ！）',
-      success: function (res) {
-        if (res.confirm) {
-          wx.showLoading({
-            title: '生成订单...',
-            mask: true,
-          })
-          util.request(api.SetRechangeOrder,{
-            userId: that.data.userInfo.id,
-            rechangePrice: that.data.disvalue
-          },'POST').then(res => {
-            console.log(res)
-            if(res.errno === 0){
-              let id = res.data
-              const pay = require('../../../services/pay.js');
-              pay.payRechangeOrder(id).then(res => {
-                console.log(res)
-                wx.hideLoading()
-                if (res.errMsg == "requestPayment:ok") {
-                  var status = 1
-                  util.request(api.SetRechangeOrderStatus, {
-                    orderId: id,
-                    status: status
-                  },"POST").then(function (ress) {
-                    if (ress.errno === 0) {
-                      console.log(ress.data);
-                      wx.showToast({
-                        title: '支付成功 !',
-                        icon: 'none',
-                        duration: 2000,
-                        mask: true,
-                      })
-                      that.close_mask()
-                      that.getuserLevelInfo()
-                      // wx.redirectTo({
-                      //   url: '/pages/payResult/payResult?status=true',
-                      // })
-                    }
-                  });
-                } else {
-                  wx.showToast({
-                    title: '支付失败 !',
-                    icon: 'none',
-                    duration: 2000,
-                    mask: true,
-                  })
-                  that.close_mask()
-                  that.getuserLevelInfo()
-                  // console.log('订单未支付')
-                  // wx.redirectTo({
-                  //   url: '/pages/payResult/payResult?status=false&orderId=' + orderId,
-                  // })
-                }
-              })
-            }
-          })
-          // that.
-        }
-      },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onReady: function () {
-  
+    // 页面渲染完成
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
+  // })
   onHide: function () {
-  
+    // 页面隐藏
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload: function () {
-  
+    // 页面关闭
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
+  phonecallevent: function (e) {
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.id
+    })
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
+  editAdmin: function (e) {
+    var that = this
+    var status = e.target.dataset.type;
+    var userId = e.target.dataset.id;
+    util.request(api.updateUsersStatus, {
+      userId: userId,
+      status: status
+    }, 'POST').then(function (res) {
+      console.log(res)
+      wx.hideLoading()
+      if (res.code === 0) {
+        var userinfo = wx.getStorageSync('userInfo')
+        if (userId == userinfo.userId) {
+          userinfo.status = status
+        }
+        wx.setStorageSync('userInfo', userinfo)
+        that.onLoad()
+      }
+    });
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })
+// 初始化七牛相关参数
+function initQiniu(that) {
+  var options = {
+    region: 'ECN', // 华北区
+    // uptokenURL: 'https://[yourserver.com]/api/uptoken',
+    uptoken: that.data.qiniuUpload,
+    // domain: 'http://[yourBucketId].bkt.clouddn.com',
+    shouldUseQiniuFileName: false
+  };
+  qiniuUploader.init(options);
+}

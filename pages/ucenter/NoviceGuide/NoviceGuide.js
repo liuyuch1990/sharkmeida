@@ -402,7 +402,7 @@ Page({
     });
     util.request(api.updateAppForPic, {
       id: this.data.editClassId,
-      url: 'https://wx.sharkmeida.cn/dist/index.html?id=&name=' + encodeURIComponent(this.data.editClassName) + '#/1pageEdit',
+      url: 'https://wx.sharkmeida.cn/dist/index.html#/1pageEdit?id=&name=' + encodeURIComponent(this.data.editClassName),
       type: '1',
       name: this.data.editClassName
     }, 'POST').then(function(res) {

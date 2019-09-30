@@ -70,15 +70,15 @@
     <image class='box_bottom_item_image' src='../../../image/ucenter_distribution.png'></image>
     <view class='box_bottom_item_text'>集赞</view>
   </view>
-  <!-- <view wx:if="{{CorporateName == 'dw'}}" class='box_bottom_item' bindtap='jumpPage' data-route='/pages/ucenter/level_page/level_page'>
+   <view wx:if="{{isSysAdmin}}" class='box_bottom_item' bindtap='jumpPage' data-route='/pages/ucenter/level_page/level_page'>
     <image class='box_bottom_item_image' src='../../../image/level.png'></image>
     <view class='box_bottom_item_text'>会员中心</view>
-  </view> -->
+  </view>
   <view class='box_bottom_item' bindtap='jumpPage' data-index='1' data-route='/pages/payResult/payResult'>
     <image class='box_bottom_item_image' src='../../../image/ucenter_feedback.png'></image>
     <view class='box_bottom_item_text'>抢购</view>
   </view>
-  <view wx:if="{{CorporateName == 'dw'}}" class='box_bottom_item' bindtap='jumpPage' data-route='/pages/ucenter/NoviceGuide/NoviceGuide'>
+  <view wx:if="{{isAdmin}}" class='box_bottom_item' bindtap='jumpPage' data-route='/pages/ucenter/NoviceGuide/NoviceGuide'>
     <image class='box_bottom_item_image' src='../../../image/ucenter_newsguides.png'></image>
     <view class='box_bottom_item_text'>小程序管理</view>
   </view>

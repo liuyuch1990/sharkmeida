@@ -16,6 +16,7 @@ function loginByWeixin() {
       return util.getUserInfo();
     }).then((userInfo) => {
       //登录远程服务器
+      userInfo.userInfo.mobile = wx.getStorageSync("mobile");
       util.request(api.getUserInfoByCode, {
         code:code,
         msg:JSON.stringify(userInfo.userInfo)

@@ -9,6 +9,8 @@ Page({
     userInfo: {},
     userinfoinfo: '',
     route: '',
+    isAdmin: false,
+    isSysAdmin: false,
     auth: false,
     CorporateName: '',
   },
@@ -18,7 +20,23 @@ Page({
     //判断是否有授权
     try {
       var value = wx.getStorageSync('auth')
+      var mobile = wx.getStorageSync('userInfo').mobile
+      var status = wx.getStorageSync('userInfo').status
       console.log(value)
+      if (mobile == '17512528181' || mobile == '18652974050' || mobile == '18652043832') {
+        that.setData({
+          isSysAdmin: true
+        })
+      }
+      if (status == '1') {
+        that.setData({
+          isAdmin: true
+        })
+      } else {
+        that.setData({
+          isAdmin: false
+        })
+      }
       if (value) {
         that.setData({
           auth: true
@@ -47,7 +65,22 @@ Page({
 
   },
   onShow: function() {
-
+    var mobile = wx.getStorageSync('userInfo').mobile
+    var status = wx.getStorageSync('userInfo').status
+    if (mobile == '17512528181' || mobile == '18652974050' || mobile == '18652043832') {
+      this.setData({
+        isSysAdmin: true
+      })
+    }
+    if (status == 1) {
+      this.setData({
+        isAdmin: true
+      })
+    } else {
+      this.setData({
+        isAdmin: false
+      })
+    }
     let userInfo = wx.getStorageSync('userInfo');
     let token = wx.getStorageSync('token');
 
